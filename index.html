@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інтерактивний робочий лист: Архітектура ПК та ОС (8 клас)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f6ff',
+                            100: '#e0edff',
+                            500: '#2563eb',
+                            600: '#1d4ed8',
+                            700: '#1e40af',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom print styles for saving as PDF */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; }
+            .print-card { border: 1px solid #ccc !important; shadow: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans antialiased min-h-screen pb-16">
+
+    <!-- Top Navigation / Controls Bar -->
+    <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur text-white border-b border-slate-800 shadow-lg no-print">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <span class="bg-blue-600 text-xs px-2.5 py-1 rounded-md font-bold uppercase tracking-wide">Інформатика 8 клас</span>
+                <h1 class="text-base sm:text-lg font-bold">Інтерактивний Робочий Лист</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="checkWorksheet()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm px-4 py-2 rounded-lg transition-all shadow-md flex items-center gap-2">
+                    <span>✅ Перевірити роботи</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-700 hover:bg-slate-600 text-white text-sm px-3 py-2 rounded-lg transition-all flex items-center gap-1.5" title="Друк / Зберегти як PDF">
+                    <span>🖨️ Друк / PDF</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 pt-6 space-y-8">
+
+        <!-- Student Info Header Card -->
+        <section class="bg-white rounded-2xl p-6 shadow-md border border-slate-200">
+            <div class="border-b border-slate-200 pb-4 mb-4 flex flex-wrap justify-between items-center gap-2">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Тема: Архітектура ПК. Пристрої. Операційні Системи</h2>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1">Варіант 2 • Інтерактивний формат для дистанційного навчання</p>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs text-slate-400 block uppercase font-semibold">Максимальний бал</span>
+                    <span class="text-2xl font-black text-blue-600">12 балів</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Прізвище та ім'я учня/учениці <span class="text-red-500">*</span></label>
+                    <input type="text" id="studentName" placeholder="Введіть Ваше ім'я" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Клас <span class="text-red-500">*</span></label>
+                    <input type="text" id="studentClass" placeholder="напр., 8-А" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Дата виконання</label>
+                    <input type="date" id="studentDate" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                </div>
+            </div>
+        </section>
+
+        <!-- BLOCK 1: HARDWARE & MEMORY -->
+        <section class="bg-white rounded-2xl p-6 shadow-md border border-slate-200 space-y-6 print-card">
+            <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
+                <span class="text-2xl">🛠️</span>
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900">БЛОК 1. «Залізна» розминка (Архітектура ПК та Пам'ять)</h3>
+                    <p class="text-xs text-slate-500">Максимум: 4 бали</p>
+                </div>
+            </div>
+
+            <!-- Task 1 -->
+            <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="flex justify-between items-start gap-2">
+                    <h4 class="font-bold text-slate-800 text-sm">Завдання 1. Анатомія Центрального Процесора (1.5 бала)</h4>
+                    <span class="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-0.5 rounded">1.5 б</span>
+                </div>
+                <p class="text-xs text-slate-600">Виберіть відповідний елемент процесора для кожного пропуску в тексті:</p>
+                
+                <div class="space-y-3 text-sm text-slate-800 leading-relaxed bg-white p-4 rounded-lg border border-slate-200">
+                    <div>
+                        1. Компонент процесора, який безпосередньо виконує всі математичні обчислення та логічні операції, називається
+                        <select id="q1_1" class="inline-block mx-1 my-1 px-2 py-1 text-sm rounded border border-slate-300 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option value="">-- Оберіть варіант --</option>
+                            <option value="ПК">Пристрій керування (ПК)</option>
+                            <option value="АЛП">Арифметико-логічний пристрій (АЛП)</option>
+                            <option value="Регістри">Регістри</option>
+                            <option value="Частота">Тактова частота</option>
+                        </select>.
+                    </div>
+                    <div>
+                        2. Надшвидка внутрішня пам'ять процесора для тимчасового збереження поточних команд і проміжних результатів — це
+                        <select id="q1_2" class="inline-block mx-1 my-1 px-2 py-1 text-sm rounded border border-slate-300 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option value="">-- Оберіть варіант --</option>
+                            <option value="ПК">Пристрій керування (ПК)</option>
+                            <option value="АЛП">Арифметико-логічний пристрій (АЛП)</option>
+                            <option value="Регістри">Регістри</option>
+                            <option value="Кеш">Жорсткий диск</option>
+                        </select>.
+                    </div>
+                    <div>
+                        3. Елемент процесора, який декодує інструкції програм і надсилає керуючі сигнали усім іншим вузлам ПК, називається
+                        <select id="q1_3" class="inline-block mx-1 my-1 px-2 py-1 text-sm rounded border border-slate-300 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option value="">-- Оберіть варіант --</option>
+                            <option value="ПК">Пристрій керування (ПК)</option>
+                            <option value="АЛП">Арифметико-логічний пристрій (АЛП)</option>
+                            <option value="Регістри">Регістри</option>
+                            <option value="Шина">Системна шина</option>
+                        </select>.
+                    </div>
+                </div>
+                <div id="feedback_q1" class="text-xs font-semibold hidden"></div>
+            </div>
+
+            <!-- Task 2 -->
+            <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="flex justify-between items-start gap-2">
+                    <h4 class="font-bold text-slate-800 text-sm">Завдання 2. Детектив периферії: Введення, Виведення чи Комбінований? (1.5 бала)</h4>
+                    <span class="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-0.5 rounded">1.5 б</span>
+                </div>
+                <p class="text-xs text-slate-600">Вкажіть тип для кожного периферийного пристрою:</p>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left border-collapse bg-white rounded-lg overflow-hidden border border-slate-200">
+                        <thead class="bg-slate-100 text-slate-700 font-bold text-xs uppercase">
+                            <tr>
+                                <th class="p-3 border-b">Пристрій</th>
+                                <th class="p-3 border-b text-center">Введення</th>
+                                <th class="p-3 border-b text-center">Виведення</th>
+                                <th class="p-3 border-b text-center">Комбінований</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-xs sm:text-sm">
+                            <tr>
+                                <td class="p-3 font-medium text-slate-800">1. Сенсорний екран смартфона</td>
+                                <td class="p-3 text-center"><input type="radio" name="dev1" value="input" class="w-4 h-4 text-blue-600"></td>
+                                <td class="p-3 text-center"><input type="radio" name="dev1" value="output" class="w-4 h-4 text-blue-600"></td>
+                                <td class="p-3 text-center"><input type="radio" name="dev1" value="combined" class="w-4 h-4 text-blue-600"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium text-slate-800">2. Графічний планшет (дигітайзер)</td>
+                                <td class="p-3 text-center"><input type="radio" name="dev2" value="input" class="w-4 h-4 text-blue-600"></td>
+                                <td class="p-3 text-center"><input type="radio" name="dev2" value="output" class="w-4 h-4 text-blue-600"></td>
+                                <td class="p-3 text-center"><input type="radio" name="dev2" value="combined" class="w-4 h-4 text-blue-600"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium text-slate-800">3. Мультимедійний проєктор</td>
+                                <td class="p-3 text-center"><input type="radio" name="dev3" value="input" class="w-4 h-4 text-blue-600"></td>
+                                <td class="p-3 text-center"><input type="radio" name="dev3" value="output" class="w-4 h-4 text-blue-600"></td>
+                                <td class="p-3 text-center"><input type="radio" name="dev3" value="combined" class="w-4 h-4 text-blue-600"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium text-slate-800">4. Гарнітура (навушники з мікрофоном)</td>
+                                <td class="p-3 text-center"><input type="radio" name="dev4" value="input" class="w-4 h-4 text-blue-600"></td>
+                                <td class="p-3 text-center"><input type="radio" name="dev4" value="output" class="w-4 h-4 text-blue-600"></td>
+                                <td class="p-3 text-center"><input type="radio" name="dev4" value="combined" class="w-4 h-4 text-blue-600"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="feedback_q2" class="text-xs font-semibold hidden"></div>
+            </div>
+
+            <!-- Task 3 -->
+            <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="flex justify-between items-start gap-2">
+                    <h4 class="font-bold text-slate-800 text-sm">Завдання 3. «Енергозалежний кодекс» (1 бал)</h4>
+                    <span class="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-0.5 rounded">1.0 б</span>
+                </div>
+                <p class="text-xs text-slate-600">Дайте коротку письмову відповідь на проблемне питання:</p>
+                <div class="bg-amber-50 p-3 rounded-lg border border-amber-200 text-xs text-amber-900 font-medium">
+                    ❓ Що станеться з незабереженим документом Word, якщо під час роботи раптово вимкнеться світло? У якій саме пам'яті перебував файл у цей момент і чому він зник?
+                </div>
+                <textarea id="q3_text" rows="3" placeholder="Напишіть ваше пояснення сюди..." class="w-full p-3 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+                
+                <div id="q3_sample" class="hidden bg-emerald-50 border border-emerald-200 p-3 rounded-lg text-xs text-emerald-900">
+                    <strong>💡 Еталонна відповідь:</strong> Файл зникне (не збережеться), тому що під час редагування він перебував у <strong>оперативній пам'яті (RAM)</strong>. Вона є енергозалежною, тому при знеструмленні всі дані з неї повністю стираються.
+                </div>
+            </div>
+        </section>
+
+        <!-- BLOCK 2: OPERATING SYSTEM & SOFTWARE -->
+        <section class="bg-white rounded-2xl p-6 shadow-md border border-slate-200 space-y-6 print-card">
+            <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
+                <span class="text-2xl">🎼</span>
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900">БЛОК 2. «Диригент ПК» (Операційна система та ПЗ)</h3>
+                    <p class="text-xs text-slate-500">Максимум: 5 балів</p>
+                </div>
+            </div>
+
+            <!-- Task 4 -->
+            <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="flex justify-between items-start gap-2">
+                    <h4 class="font-bold text-slate-800 text-sm">Завдання 4. Ієрархічний конструктор ПЗ (1.5 бала)</h4>
+                    <span class="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-0.5 rounded">1.5 б</span>
+                </div>
+                <p class="text-xs text-slate-600">Розподіліть наведені назви за трьома рівнями ПЗ:</p>
+                
+                <div class="space-y-3 text-xs sm:text-sm">
+                    <!-- Application SW -->
+                    <div class="bg-indigo-50 border border-indigo-200 p-3 rounded-lg">
+                        <label class="font-bold text-indigo-900 block mb-1">РІВЕНЬ А: Прикладне ПЗ</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            <label class="flex items-center gap-1.5 bg-white p-2 rounded border border-indigo-100 cursor-pointer">
+                                <input type="checkbox" name="sw_app" value="vlc" class="w-4 h-4"> VLC Player
+                            </label>
+                            <label class="flex items-center gap-1.5 bg-white p-2 rounded border border-indigo-100 cursor-pointer">
+                                <input type="checkbox" name="sw_app" value="mc" class="w-4 h-4"> Гра Minecraft
+                            </label>
+                            <label class="flex items-center gap-1.5 bg-white p-2 rounded border border-indigo-100 cursor-pointer">
+                                <input type="checkbox" name="sw_app" value="word" class="w-4 h-4"> MS Word
+                            </label>
+                            <label class="flex items-center gap-1.5 bg-white p-2 rounded border border-indigo-100 cursor-pointer">
+                                <input type="checkbox" name="sw_app" value="macos" class="w-4 h-4"> macOS
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- System SW -->
+                    <div class="bg-teal-50 border border-teal-200 p-3 rounded-lg">
+                        <label class="font-bold text-teal-900 block mb-1">РІВЕНЬ Б: Системне ПЗ</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            <label class="flex items-center gap-1.5 bg-white p-2 rounded border border-teal-100 cursor-pointer">
+                                <input type="checkbox" name="sw_sys" value="macos" class="w-4 h-4"> macOS Sonoma
+                            </label>
+                            <label class="flex items-center gap-1.5 bg-white p-2 rounded border border-teal-100 cursor-pointer">
+                                <input type="checkbox" name="sw_sys" value="anti" class="w-4 h-4"> Антивірус
+                            </label>
+                            <label class="flex items-center gap-1.5 bg-white p-2 rounded border border-teal-100 cursor-pointer">
+                                <input type="checkbox" name="sw_sys" value="drv" class="w-4 h-4"> Драйвер аудіо
+                            </label>
+                            <label class="flex items-center gap-1.5 bg-white p-2 rounded border border-teal-100 cursor-pointer">
+                                <input type="checkbox" name="sw_sys" value="ssd" class="w-4 h-4"> SSD накопичувач
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Hardware -->
+                    <div class="bg-slate-200 border border-slate-300 p-3 rounded-lg">
+                        <label class="font-bold text-slate-800 block mb-1">РІВЕНЬ В: Апаратне забезпечення («Залізо»)</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            <label class="flex items-center gap-1.5 bg-white p-2 rounded border border-slate-300 cursor-pointer">
+                                <input type="checkbox" name="sw_hw" value="ssd" class="w-4 h-4"> SSD-накопичувач
+                            </label>
+                            <label class="flex items-center gap-1.5 bg-white p-2 rounded border border-slate-300 cursor-pointer">
+                                <input type="checkbox" name="sw_hw" value="drv" class="w-4 h-4"> Драйвер
+                            </label>
+                            <label class="flex items-center gap-1.5 bg-white p-2 rounded border border-slate-300 cursor-pointer">
+                                <input type="checkbox" name="sw_hw" value="word" class="w-4 h-4"> MS Word
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div id="feedback_q4" class="text-xs font-semibold hidden"></div>
+            </div>
+
+            <!-- Task 5 -->
+            <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="flex justify-between items-start gap-2">
+                    <h4 class="font-bold text-slate-800 text-sm">Завдання 5. Чотири стовпи Операційної Системи (2 бали)</h4>
+                    <span class="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-0.5 rounded">2.0 б</span>
+                </div>
+                <p class="text-xs text-slate-600">Установіть відповідність між функцією ОС та прикладом її роботи:</p>
+
+                <div class="space-y-2 text-xs sm:text-sm">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white p-3 rounded-lg border border-slate-200 gap-2">
+                        <span class="font-semibold text-slate-800">А. Управління пам'яттю</span>
+                        <select id="match_A" class="w-full sm:w-auto p-1.5 rounded border border-slate-300 text-xs bg-slate-50 outline-none">
+                            <option value="">-- Оберіть приклад --</option>
+                            <option value="1">1. Створення папок, перейменування .docx</option>
+                            <option value="2">2. Вібрація та вікно при підключенні USB-флешки</option>
+                            <option value="3">3. Розподіл обсягу RAM між вкладками браузера</option>
+                            <option value="4">4. Відображення вікон, робочого столу та значків</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white p-3 rounded-lg border border-slate-200 gap-2">
+                        <span class="font-semibold text-slate-800">Б. Файлова система</span>
+                        <select id="match_B" class="w-full sm:w-auto p-1.5 rounded border border-slate-300 text-xs bg-slate-50 outline-none">
+                            <option value="">-- Оберіть приклад --</option>
+                            <option value="1">1. Створення папок, перейменування .docx</option>
+                            <option value="2">2. Вібрація та вікно при підключенні USB-флешки</option>
+                            <option value="3">3. Розподіл обсягу RAM між вкладками браузера</option>
+                            <option value="4">4. Відображення вікон, робочого столу та значків</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white p-3 rounded-lg border border-slate-200 gap-2">
+                        <span class="font-semibold text-slate-800">В. Взаємодія з обладнанням</span>
+                        <select id="match_V" class="w-full sm:w-auto p-1.5 rounded border border-slate-300 text-xs bg-slate-50 outline-none">
+                            <option value="">-- Оберіть приклад --</option>
+                            <option value="1">1. Створення папок, перейменування .docx</option>
+                            <option value="2">2. Вібрація та вікно при підключенні USB-флешки</option>
+                            <option value="3">3. Розподіл обсягу RAM між вкладками браузера</option>
+                            <option value="4">4. Відображення вікон, робочого столу та значків</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white p-3 rounded-lg border border-slate-200 gap-2">
+                        <span class="font-semibold text-slate-800">Г. Графічний інтерфейс (UI)</span>
+                        <select id="match_G" class="w-full sm:w-auto p-1.5 rounded border border-slate-300 text-xs bg-slate-50 outline-none">
+                            <option value="">-- Оберіть приклад --</option>
+                            <option value="1">1. Створення папок, перейменування .docx</option>
+                            <option value="2">2. Вібрація та вікно при підключенні USB-флешки</option>
+                            <option value="3">3. Розподіл обсягу RAM між вкладками браузера</option>
+                            <option value="4">4. Відображення вікон, робочого столу та значків</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="feedback_q5" class="text-xs font-semibold hidden"></div>
+            </div>
+
+            <!-- Task 6 -->
+            <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="flex justify-between items-start gap-2">
+                    <h4 class="font-bold text-slate-800 text-sm">Завдання 6. Експрес-тест: Сумісність та Файлові системи (1.5 бала)</h4>
+                    <span class="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-0.5 rounded">1.5 б</span>
+                </div>
+
+                <div class="space-y-3 text-xs sm:text-sm">
+                    <!-- Q6.1 -->
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800">1. Максим завантажив гру для Windows (.exe) і намагається запустити її на планшеті Android. Гра не запускається. Чому?</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <label class="flex items-center gap-2 border p-2 rounded hover:bg-slate-50 cursor-pointer">
+                                <input type="radio" name="q6_1" value="a"> а) Апаратна несправність
+                            </label>
+                            <label class="flex items-center gap-2 border p-2 rounded hover:bg-slate-50 cursor-pointer">
+                                <input type="radio" name="q6_1" value="b"> б) Нестача пам'яті
+                            </label>
+                            <label class="flex items-center gap-2 border p-2 rounded hover:bg-slate-50 cursor-pointer">
+                                <input type="radio" name="q6_1" value="c"> в) Несумісність з ОС
+                            </label>
+                            <label class="flex items-center gap-2 border p-2 rounded hover:bg-slate-50 cursor-pointer">
+                                <input type="radio" name="q6_1" value="d"> г) Помилка файлової системи
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Q6.2 -->
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800">2. Здатність нової версії ОС (Windows 11) відкривати файли зі старих версій (Windows 7) називається:</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <label class="flex items-center gap-2 border p-2 rounded hover:bg-slate-50 cursor-pointer">
+                                <input type="radio" name="q6_2" value="a"> а) Зворотною сумісністю
+                            </label>
+                            <label class="flex items-center gap-2 border p-2 rounded hover:bg-slate-50 cursor-pointer">
+                                <input type="radio" name="q6_2" value="b"> б) Автозавантаженням
+                            </label>
+                            <label class="flex items-center gap-2 border p-2 rounded hover:bg-slate-50 cursor-pointer">
+                                <input type="radio" name="q6_2" value="c"> в) Драйвером
+                            </label>
+                            <label class="flex items-center gap-2 border p-2 rounded hover:bg-slate-50 cursor-pointer">
+                                <input type="radio" name="q6_2" value="d"> г) Ліцензуванням
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Q6.3 -->
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800">3. Яка з наведених файлових систем є основною для операційної системи Linux?</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            <label class="flex items-center gap-2 border p-2 rounded hover:bg-slate-50 cursor-pointer">
+                                <input type="radio" name="q6_3" value="a"> a) APFS
+                            </label>
+                            <label class="flex items-center gap-2 border p-2 rounded hover:bg-slate-50 cursor-pointer">
+                                <input type="radio" name="q6_3" value="b"> б) FAT32
+                            </label>
+                            <label class="flex items-center gap-2 border p-2 rounded hover:bg-slate-50 cursor-pointer">
+                                <input type="radio" name="q6_3" value="c"> в) NTFS
+                            </label>
+                            <label class="flex items-center gap-2 border p-2 rounded hover:bg-slate-50 cursor-pointer">
+                                <input type="radio" name="q6_3" value="d"> г) ext4
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div id="feedback_q6" class="text-xs font-semibold hidden"></div>
+            </div>
+        </section>
+
+        <!-- BLOCK 3: LICENSES & PRACTICAL WORKSHOP -->
+        <section class="bg-white rounded-2xl p-6 shadow-md border border-slate-200 space-y-6 print-card">
+            <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
+                <span class="text-2xl">⚖️</span>
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900">БЛОК 3. Ліцензії ПЗ та Практична майстерня</h3>
+                    <p class="text-xs text-slate-500">Максимум: 3 бали</p>
+                </div>
+            </div>
+
+            <!-- Task 7 -->
+            <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="flex justify-between items-start gap-2">
+                    <h4 class="font-bold text-slate-800 text-sm">Завдання 7. Ліцензійний детектив (1.5 бала)</h4>
+                    <span class="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-0.5 rounded">1.5 б</span>
+                </div>
+                <p class="text-xs text-slate-600">Визначте тип ліцензії для кожного випадку:</p>
+
+                <div class="space-y-3 text-xs sm:text-sm">
+                    <div class="bg-white p-3 rounded-lg border border-slate-200">
+                        <p class="mb-2"><strong>Випадок №1:</strong> Софія завантажила графічний редактор GIMP. Додаток безкоштовний, а його код відкритий для перегляду та модифікації.</p>
+                        <select id="lic_1" class="w-full sm:w-auto p-1.5 rounded border border-slate-300 text-xs bg-slate-50 outline-none">
+                            <option value="">-- Оберіть тип ліцензії --</option>
+                            <option value="opensource">Open Source (Відкритий код)</option>
+                            <option value="freeware">Freeware (Безкоштовне)</option>
+                            <option value="shareware">Shareware (Умовно-безкоштовне)</option>
+                            <option value="proprietary">Пропрієтарне (Комерційне)</option>
+                        </select>
+                    </div>
+
+                    <div class="bg-white p-3 rounded-lg border border-slate-200">
+                        <p class="mb-2"><strong>Випадок №2:</strong> Андрій безкоштовно завантажив месенджер Telegram та VLC. Програми безкоштовні, але код закритий для змін.</p>
+                        <select id="lic_2" class="w-full sm:w-auto p-1.5 rounded border border-slate-300 text-xs bg-slate-50 outline-none">
+                            <option value="">-- Оберіть тип ліцензії --</option>
+                            <option value="opensource">Open Source (Відкритий код)</option>
+                            <option value="freeware">Freeware (Безкоштовне)</option>
+                            <option value="shareware">Shareware (Умовно-безкоштовне)</option>
+                            <option value="proprietary">Пропрієтарне (Комерційне)</option>
+                        </select>
+                    </div>
+
+                    <div class="bg-white p-3 rounded-lg border border-slate-200">
+                        <p class="mb-2"><strong>Випадок №3:</strong> Дмитро купив підписку на Photoshop. Угода забороняє передавати акаунт та копіювати код.</p>
+                        <select id="lic_3" class="w-full sm:w-auto p-1.5 rounded border border-slate-300 text-xs bg-slate-50 outline-none">
+                            <option value="">-- Оберіть тип ліцензії --</option>
+                            <option value="opensource">Open Source (Відкритий код)</option>
+                            <option value="freeware">Freeware (Безкоштовне)</option>
+                            <option value="shareware">Shareware (Умовно-безкоштовне)</option>
+                            <option value="proprietary">Пропрієтарне (Комерційне)</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="feedback_q7" class="text-xs font-semibold hidden"></div>
+            </div>
+
+            <!-- Task 8 -->
+            <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="flex justify-between items-start gap-2">
+                    <h4 class="font-bold text-slate-800 text-sm">Завдання 8. Практичний аналіз: Системні вимоги (1.5 бала)</h4>
+                    <span class="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-0.5 rounded">1.5 б</span>
+                </div>
+
+                <div class="bg-slate-900 text-slate-200 p-3 rounded-lg font-mono text-xs">
+                    [ МІНІМАЛЬНІ СИСТЕМНІ ВИМОГИ ГРИ ]<br>
+                    ОС: 64-bit Windows 10 / Windows 11<br>
+                    Процесор: Intel Core i5-8400 або AMD Ryzen 5 2600<br>
+                    Оперативна пам'ять (RAM): 12 GB<br>
+                    Відеокарта: NVIDIA GeForce GTX 1060 (6 GB)<br>
+                    Вільне місце на диску: 70 GB (SSD рекомендовано)
+                </div>
+
+                <div class="space-y-3 text-xs sm:text-sm">
+                    <div>
+                        <p class="font-semibold text-slate-800 mb-1">1. Чи запуститься ця гра на ПК з 8 GB оперативної пам'яті (RAM)? Чому?</p>
+                        <select id="req_q1" class="w-full sm:w-auto p-1.5 rounded border border-slate-300 text-xs bg-white outline-none mb-2">
+                            <option value="">-- Оберіть рішення --</option>
+                            <option value="yes">Так, запустить без проблем</option>
+                            <option value="no">Ні, не запуститься або працюватиме із замираннями</option>
+                        </select>
+                        <textarea id="req_q1_text" rows="2" placeholder="Поясніть вашу думку..." class="w-full p-2 text-xs rounded border border-slate-300 outline-none"></textarea>
+                    </div>
+
+                    <div>
+                        <p class="font-semibold text-slate-800 mb-1">2. Чому розробники рекомендують саме SSD-накопичувач замість класичного HDD?</p>
+                        <textarea id="req_q2_text" rows="2" placeholder="Напишіть відповідь про швидкість SSD..." class="w-full p-2 text-xs rounded border border-slate-300 outline-none"></textarea>
+                    </div>
+                </div>
+
+                <div id="q8_sample" class="hidden bg-emerald-50 border border-emerald-200 p-3 rounded-lg text-xs text-emerald-900 space-y-1">
+                    <p>💡 <strong>Еталонні пояснення:</strong></p>
+                    <p>1. Наявних 8 GB RAM недостатньо, оскільки мінімальні вимоги гри вимагають від 12 GB RAM.</p>
+                    <p>2. SSD має набагато вищу швидкість читання/запису даних, що забезпечує швидке завантаження рівнів та відсутність підлагувань.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- BLOCK 4: REFLECTION -->
+        <section class="bg-white rounded-2xl p-6 shadow-md border border-slate-200 print-card">
+            <div class="flex items-center gap-3 border-b border-slate-200 pb-3 mb-4">
+                <span class="text-2xl">🚦</span>
+                <h3 class="text-lg font-bold text-slate-900">БЛОК 4. Самооцінювання («Світлофор розуміння»)</h3>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-sm">
+                <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:border-emerald-500 cursor-pointer transition">
+                    <input type="radio" name="traffic_light" value="green" class="w-4 h-4 text-emerald-600">
+                    <div>
+                        <span class="font-bold text-emerald-700 block">🟢 Зелений</span>
+                        <span class="text-slate-500 text-xs">Усе зрозуміло, можу пояснити другу!</span>
+                    </div>
+                </label>
+                <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:border-amber-500 cursor-pointer transition">
+                    <input type="radio" name="traffic_light" value="yellow" class="w-4 h-4 text-amber-600">
+                    <div>
+                        <span class="font-bold text-amber-700 block">🟡 Жовтий</span>
+                        <span class="text-slate-500 text-xs">Все зрозуміло, але є кілька питань.</span>
+                    </div>
+                </label>
+                <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:border-rose-500 cursor-pointer transition">
+                    <input type="radio" name="traffic_light" value="red" class="w-4 h-4 text-rose-600">
+                    <div>
+                        <span class="font-bold text-rose-700 block">🔴 Червоний</span>
+                        <span class="text-slate-500 text-xs">Потрібна допомога вчителя.</span>
+                    </div>
+                </label>
+            </div>
+        </section>
+
+        <!-- ACTION BUTTONS -->
+        <div class="text-center space-y-4 no-print">
+            <button onclick="checkWorksheet()" class="bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-base px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5">
+                🎯 Перевірити всі завдання та виставити оцінку
+            </button>
+        </div>
+
+        <!-- RESULTS OVERLAY MODAL -->
+        <div id="resultsModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden no-print">
+            <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 space-y-5 animate-in fade-in zoom-in duration-200">
+                <div class="text-center">
+                    <div id="scoreBadge" class="w-20 h-20 rounded-full mx-auto flex items-center justify-center text-3xl font-black text-white shadow-lg mb-2">
+                        --
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900" id="resultTitle">Результати роботи</h3>
+                    <p class="text-xs text-slate-500 mt-1" id="studentSummaryInfo"></p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl space-y-2 text-xs border border-slate-200">
+                    <div class="flex justify-between">
+                        <span>Блок 1 (Залізо та Пам'ять):</span>
+                        <strong id="b1_score">0 / 4</strong>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Блок 2 (ОС та ПЗ):</span>
+                        <strong id="b2_score">0 / 5</strong>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Блок 3 (Ліцензії та Практикум):</span>
+                        <strong id="b3_score">0 / 3</strong>
+                    </div>
+                    <hr class="my-2 border-slate-200">
+                    <div class="flex justify-between text-sm font-bold text-slate-800">
+                        <span>Підсумковий бал:</span>
+                        <span id="total_score" class="text-blue-600 text-base">0 / 12</span>
+                    </div>
+                </div>
+
+                <p id="teacherComment" class="text-xs text-center text-slate-600 italic bg-blue-50 p-3 rounded-lg border border-blue-100">
+                    Зауваження вчителя з'являться тут після перевірки.
+                </p>
+
+                <div class="flex gap-3">
+                    <button onclick="closeModal()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-800 text-sm font-bold py-2.5 rounded-lg transition">
+                        Закрити
+                    </button>
+                    <button onclick="window.print()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold py-2.5 rounded-lg transition">
+                        🖨️ Зберегти у PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Set today's date automatically in date field
+        document.getElementById('studentDate').valueAsDate = new Date();
+
+        function checkWorksheet() {
+            const name = document.getElementById('studentName').value.trim();
+            const studentClass = document.getElementById('studentClass').value.trim();
+
+            if (!name || !studentClass) {
+                showToast("Будь ласка, заповніть Ім'я та Клас у заголовочній картці!");
+                document.getElementById('studentName').focus();
+                return;
+            }
+
+            let scoreB1 = 0;
+            let scoreB2 = 0;
+            let scoreB3 = 0;
+
+            // --- TASK 1 CHECK ---
+            const q1_1 = document.getElementById('q1_1').value;
+            const q1_2 = document.getElementById('q1_2').value;
+            const q1_3 = document.getElementById('q1_3').value;
+
+            if (q1_1 === 'АЛП') scoreB1 += 0.5;
+            if (q1_2 === 'Регістри') scoreB1 += 0.5;
+            if (q1_3 === 'ПК') scoreB1 += 0.5;
+
+            // --- TASK 2 CHECK ---
+            const dev1 = document.querySelector('input[name="dev1"]:checked')?.value;
+            const dev2 = document.querySelector('input[name="dev2"]:checked')?.value;
+            const dev3 = document.querySelector('input[name="dev3"]:checked')?.value;
+            const dev4 = document.querySelector('input[name="dev4"]:checked')?.value;
+
+            if (dev1 === 'combined') scoreB1 += 0.375;
+            if (dev2 === 'input') scoreB1 += 0.375;
+            if (dev3 === 'output') scoreB1 += 0.375;
+            if (dev4 === 'combined') scoreB1 += 0.375;
+
+            // --- TASK 3 CHECK (Open text sample reveal) ---
+            const q3Text = document.getElementById('q3_text').value.toLowerCase();
+            document.getElementById('q3_sample').classList.remove('hidden');
+            if (q3Text.includes('оперативн') || q3Text.includes('ram') || q3Text.includes('енергозалеж')) {
+                scoreB1 += 1.0;
+            } else if (q3Text.length > 10) {
+                scoreB1 += 0.5;
+            }
+
+            // --- TASK 4 CHECK ---
+            const appChecked = Array.from(document.querySelectorAll('input[name="sw_app"]:checked')).map(e => e.value);
+            const sysChecked = Array.from(document.querySelectorAll('input[name="sw_sys"]:checked')).map(e => e.value);
+            const hwChecked = Array.from(document.querySelectorAll('input[name="sw_hw"]:checked')).map(e => e.value);
+
+            let t4_correct = 0;
+            if (appChecked.includes('vlc') && appChecked.includes('mc') && appChecked.includes('word') && appChecked.length === 3) t4_correct++;
+            if (sysChecked.includes('macos') && sysChecked.includes('anti') && sysChecked.includes('drv') && sysChecked.length === 3) t4_correct++;
+            if (hwChecked.includes('ssd') && hwChecked.length === 1) t4_correct++;
+
+            scoreB2 += (t4_correct / 3) * 1.5;
+
+            // --- TASK 5 CHECK ---
+            const mA = document.getElementById('match_A').value;
+            const mB = document.getElementById('match_B').value;
+            const mV = document.getElementById('match_V').value;
+            const mG = document.getElementById('match_G').value;
+
+            if (mA === '3') scoreB2 += 0.5;
+            if (mB === '1') scoreB2 += 0.5;
+            if (mV === '2') scoreB2 += 0.5;
+            if (mG === '4') scoreB2 += 0.5;
+
+            // --- TASK 6 CHECK ---
+            const q6_1 = document.querySelector('input[name="q6_1"]:checked')?.value;
+            const q6_2 = document.querySelector('input[name="q6_2"]:checked')?.value;
+            const q6_3 = document.querySelector('input[name="q6_3"]:checked')?.value;
+
+            if (q6_1 === 'c') scoreB2 += 0.5;
+            if (q6_2 === 'a') scoreB2 += 0.5;
+            if (q6_3 === 'd') scoreB2 += 0.5;
+
+            // --- TASK 7 CHECK ---
+            const lic1 = document.getElementById('lic_1').value;
+            const lic2 = document.getElementById('lic_2').value;
+            const lic3 = document.getElementById('lic_3').value;
+
+            if (lic1 === 'opensource') scoreB3 += 0.5;
+            if (lic2 === 'freeware') scoreB3 += 0.5;
+            if (lic3 === 'proprietary') scoreB3 += 0.5;
+
+            // --- TASK 8 CHECK ---
+            const reqQ1 = document.getElementById('req_q1').value;
+            const reqQ1Text = document.getElementById('req_q1_text').value;
+            const reqQ2Text = document.getElementById('req_q2_text').value;
+
+            document.getElementById('q8_sample').classList.remove('hidden');
+
+            if (reqQ1 === 'no') scoreB3 += 0.5;
+            if (reqQ1Text.length > 5) scoreB3 += 0.5;
+            if (reqQ2Text.length > 5) scoreB3 += 0.5;
+
+            // Round scores
+            scoreB1 = Math.min(4, Math.round(scoreB1 * 10) / 10);
+            scoreB2 = Math.min(5, Math.round(scoreB2 * 10) / 10);
+            scoreB3 = Math.min(3, Math.round(scoreB3 * 10) / 10);
+
+            const totalScore = Math.min(12, Math.round((scoreB1 + scoreB2 + scoreB3) * 10) / 10);
+
+            // Display in Modal
+            document.getElementById('b1_score').innerText = `${scoreB1} / 4`;
+            document.getElementById('b2_score').innerText = `${scoreB2} / 5`;
+            document.getElementById('b3_score').innerText = `${scoreB3} / 3`;
+            document.getElementById('total_score').innerText = `${totalScore} / 12`;
+
+            document.getElementById('studentSummaryInfo').innerText = `Учень/учениця: ${name} (${studentClass})`;
+
+            const badge = document.getElementById('scoreBadge');
+            badge.innerText = Math.round(totalScore);
+
+            let comment = "";
+            if (totalScore >= 10) {
+                badge.className = "w-20 h-20 rounded-full mx-auto flex items-center justify-center text-3xl font-black text-white shadow-lg mb-2 bg-emerald-500";
+                comment = "🏆 Відмінний результат! Ви чудово засвоїли архітектуру ПК та тему Операційних систем!";
+            } else if (totalScore >= 7) {
+                badge.className = "w-20 h-20 rounded-full mx-auto flex items-center justify-center text-3xl font-black text-white shadow-lg mb-2 bg-blue-500";
+                comment = "👍 Добре розбираєтесь у темі! Перегляньте завдання з помилками для покращення.";
+            } else if (totalScore >= 4) {
+                badge.className = "w-20 h-20 rounded-full mx-auto flex items-center justify-center text-3xl font-black text-white shadow-lg mb-2 bg-amber-500";
+                comment = "🟡 Задовільно. Рекомендується повторити поняття файлових систем та типів ліцензій.";
+            } else {
+                badge.className = "w-20 h-20 rounded-full mx-auto flex items-center justify-center text-3xl font-black text-white shadow-lg mb-2 bg-rose-500";
+                comment = "🔴 Потрібно більше практики. Опрацюйте конспект уроку ще раз.";
+            }
+
+            document.getElementById('teacherComment').innerText = comment;
+            document.getElementById('resultsModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('resultsModal').classList.add('hidden');
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-5 right-5 bg-slate-900 text-white text-xs px-4 py-3 rounded-xl shadow-2xl z-50 animate-bounce';
+            toast.innerText = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+    </script>
+</body>
+</html>
